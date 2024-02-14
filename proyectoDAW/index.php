@@ -13,10 +13,11 @@ header("Access-Control-Allow-Methods: *");
 require_once "models/MySqlConnect.php";
 /***--- Agregar todos los modelos*/
 require_once "models/UsuarioModel.php";
+require_once "models/ProductoModel.php";
 
 /***--- Agregar todos los controladores*/
 require_once "controllers/UsuarioController.php";
-
+require_once "controllers/ProductoController.php";
 //Enrutador
 //RoutesController.php
 require_once "controllers/RoutesController.php";
