@@ -1,27 +1,23 @@
 <?php
 
-class ProductoModel
+class producto
 {
-  public $enlace;
-  public function __construct()
+  public function index()
   {
-    $this->enlace = new MySqlConnect();
-  }
-/**
-     * Listar productos
-     * @param 
-     * @return $vResultado - Lista de produtos
-     */
-  public function all()
-  {
-    try {
-      $vSQL = "SELECT * FROM producto;";
-      $vResultado = $this->enlace->ExecuteSQL($vSQL);
-
-      return $vResultado;
-
-    } catch (Exception $e) {
-      die("" . $e->getMessage());
+    $productoM = new ProductoModel;
+    $response = $productoM->all();
+    if (isset($response) && !empty($response)) {
+      $json = array(
+        'status' => 200,
+        'results' => $response
+      );
+    } else {
+      $json = array(
+        'status' => 400,
+        'results' => "No hay registros"
+      );
     }
+    echo json_encode($json,
+    http_response_code($json["status"]));
   }
 }
