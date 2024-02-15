@@ -27,4 +27,21 @@ class CategoriaModel
       die("" . $e->getMessage());
     }
   }
+    public function get($id)
+  {
+    try {
+      $vSql = "SELECT * from categoria where Idcategoria = $id";
+
+      //Ejecutar la consulta sql
+      $vResultado = $this->enlace->executeSQL($vSql);
+      if (!empty($vResultado)) {
+        //Obtener objeto
+        $vResultado = $vResultado[0];
+      }
+      return $vResultado;
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+
+  }
 }
