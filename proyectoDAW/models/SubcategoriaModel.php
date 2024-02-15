@@ -27,4 +27,21 @@ class SubcategoriaModel
       die("" . $e->getMessage());
     }
   }
+  public function get($id)
+  {
+    try {
+      $vSql = "SELECT * from subcategoria where Idsubcategoria = $id";
+
+      //Ejecutar la consulta sql
+      $vResultado = $this->enlace->executeSQL($vSql);
+      if (!empty($vResultado)) {
+        //Obtener objeto
+        $vResultado = $vResultado[0];
+      }
+      return $vResultado;
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+
+  }
 }
