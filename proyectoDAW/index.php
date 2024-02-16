@@ -14,8 +14,8 @@ require_once "models/MySqlConnect.php";
 /***--- Agregar todos los modelos*/
 require_once "models/UsuarioModel.php";
 require_once "models/ProductoModel.php";
-require_once "models/Categoria.php";
-require_once "models/Subcategoria.php";
+require_once "models/CategoriaModel.php";
+require_once "models/SubcategoriaModel.php";
 
 /***--- Agregar todos los controladores*/
 require_once "controllers/UsuarioController.php";
