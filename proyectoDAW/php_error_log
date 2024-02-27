@@ -1,0 +1,14 @@
+[24-Feb-2024 02:24:32 Europe/Berlin] PHP Warning:  require_once(controllers/SalidadInventarioController.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\proyectoDAW\index.php on line 40
+[24-Feb-2024 02:24:32 Europe/Berlin] PHP Stack trace:
+[24-Feb-2024 02:24:32 Europe/Berlin] PHP   1. {main}() C:\xampp\htdocs\proyectoDAW\index.php:0
+[24-Feb-2024 02:24:32 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'controllers/SalidadInventarioController.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\proyectoDAW\index.php:40
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\proyectoDAW\index.php on line 40
+[24-Feb-2024 02:26:59 Europe/Berlin] PHP Warning:  require_once(controllers/SalidadInventarioController.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\proyectoDAW\index.php on line 40
+[24-Feb-2024 02:26:59 Europe/Berlin] PHP Stack trace:
+[24-Feb-2024 02:26:59 Europe/Berlin] PHP   1. {main}() C:\xampp\htdocs\proyectoDAW\index.php:0
+[24-Feb-2024 02:26:59 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'controllers/SalidadInventarioController.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\proyectoDAW\index.php:40
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\proyectoDAW\index.php on line 40
