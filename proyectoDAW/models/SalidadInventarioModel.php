@@ -27,16 +27,21 @@ class SalidaInventarioModel
       die("" . $e->getMessage());
     }
   }
-  public function get($id)
+ public function get($id)
   {
     try {
       $vSql = "SELECT * from salidaInventario where Id = $id";
-
+      $bodegaM = new BodegaModel();
       //Ejecutar la consulta sql
       $vResultado = $this->enlace->executeSQL($vSql);
       if (!empty($vResultado)) {
         //Obtener objeto
         $vResultado = $vResultado[0];
+
+        $bodega = $bodegaM->get($vResultado->BodegaID);
+
+
+       $vResultado->IdSubcategoria = $bodega;
       }
       return $vResultado;
     } catch (Exception $e) {
