@@ -28,12 +28,19 @@ class BodegaModel
   {
     try {
       $vSql = "SELECT * from bodega where Id = $id";
-
+      $ubicacionM = new UbicacionModel();
       //Ejecutar la consulta sql
       $vResultado = $this->enlace->executeSQL($vSql);
       if (!empty($vResultado)) {
         //Obtener objeto
         $vResultado = $vResultado[0];
+
+        $ubicacio = $ubicacionM->get($vResultado->IdUbicacion);
+
+
+       $vResultado->IdUbicacion = $ubicacio;
+
+
       }
       return $vResultado;
     } catch (Exception $e) {
