@@ -34,12 +34,33 @@ class TrasladoModel
     {
       try {
         $vSql = "SELECT * from traslado where Id = $id";
-  
+        $bodegaM = new BodegaModel();
+        $usuarioM = new UsuarioModel();
         //Ejecutar la consulta sql
         $vResultado = $this->enlace->executeSQL($vSql);
         if (!empty($vResultado)) {
           //Obtener objeto
           $vResultado = $vResultado[0];
+
+          //Usuario registro
+          $usuario = $usuarioM->get($vResultado->UsuarioRegistro);
+
+
+          $vResultado->UsuarioRegistro = $usuario;
+
+          //Bodega origen
+          $bodega = $bodegaM->get($vResultado->BodegaOrigenID);
+
+
+          $vResultado->BodegaOrigenID = $bodega;
+
+           //Bodega destino
+           $bodega = $bodegaM->get($vResultado->BodegaDestinoID);
+
+
+           $vResultado->BodegaDestinoID = $bodega;
+
+
         }
         return $vResultado;
       } catch (Exception $e) {
