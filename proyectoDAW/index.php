@@ -28,6 +28,7 @@ require_once "models/OrdenCompraModel.php";
 require_once "models/OrdenXProductoModel.php";
 require_once "models/ContactosModel.php";
 require_once "models/UsuarioXBodegaModel.php";
+require_once "models/UbicacionModel.php";
 
 /***--- Agregar todos los controladores*/
 require_once "controllers/UsuarioController.php";
@@ -46,6 +47,7 @@ require_once "controllers/OrdenCompraController.php";
 require_once "controllers/OrdenXProductoController.php";
 require_once "controllers/ContactosController.php";
 require_once "controllers/UsuarioXBodegaController.php";
+require_once "controllers/UbicacionController.php";
 //Enrutador
 //RoutesController.php
 require_once "controllers/RoutesController.php";
