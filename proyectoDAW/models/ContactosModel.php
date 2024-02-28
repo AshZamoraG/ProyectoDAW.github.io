@@ -27,13 +27,20 @@ class ContactosModel
   public function get($id)
   {
     try {
-      $vSql = "SELECT * from contactos where IdContacto = $id";
+      $vSql = "SELECT * from contactos where Id = $id";
+      $proveedorM = new ProveedorModel();
 
       //Ejecutar la consulta sql
       $vResultado = $this->enlace->executeSQL($vSql);
       if (!empty($vResultado)) {
         //Obtener objeto
         $vResultado = $vResultado[0];
+
+        $proveedor = $proveedorM->get($vResultado->IdProveedor);
+
+
+       $vResultado->IdProveedor = $proveedor;
+
       }
       return $vResultado;
     } catch (Exception $e) {
