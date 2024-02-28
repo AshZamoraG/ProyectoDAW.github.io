@@ -29,5 +29,32 @@ class UsuarioXBodegaModel
             die("" . $e->getMessage());
         }
     }
+    public function get($id)
+    {
+      try {
+        $vSql = "SELECT * from UsuarioXBodega where IdUsuario = $id";
+        $bodegaM = new BodegaModel();
+        $usuarioM = new UsuarioModel();
+
+        
+        //Ejecutar la consulta sql
+        $vResultado = $this->enlace->executeSQL($vSql);
+        if (!empty($vResultado)) {
+          //Obtener objeto
+          $vResultado = $vResultado[0];
+
+          $usuario = $usuarioM->get($vResultado->IdUsuario);
+          $vResultado->UsuarioRegistro = $usuario;
+
+          $bodega = $bodegaM->get( $vResultado->IdBodega);
+          $vResultado->IdBodega= $bodega;
+
+
+        }
+        return $vResultado;
+      } catch (Exception $e) {
+        die($e->getMessage());
+      }
+    }
 
 }
