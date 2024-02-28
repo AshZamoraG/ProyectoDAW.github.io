@@ -31,13 +31,19 @@ class SubcategoriaModel
   public function get($id)
   {
     try {
-      $vSql = "SELECT * from subcategoria where IdSubcategoria = $id";
+      $vSql = "SELECT * from subcategoria where Id = $id";
+      $categoriaM = new CategoriaModel();
 
       //Ejecutar la consulta sql
       $vResultado = $this->enlace->executeSQL($vSql);
       if (!empty($vResultado)) {
         //Obtener objeto
         $vResultado = $vResultado[0];
+
+        $categoria = $categoriaM->get($vResultado->IdCategoria);
+
+        $vResultado->IdCategoria = $categoria;
+
       }
       return $vResultado;
     } catch (Exception $e) {
