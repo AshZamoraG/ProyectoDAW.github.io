@@ -28,12 +28,19 @@ class ProductoModel
   {
     try {
       $vSql = "SELECT * from producto where Id = $id";
-
+      $subcategoriaM = new SubcategoriaModel();
       //Ejecutar la consulta sql
       $vResultado = $this->enlace->executeSQL($vSql);
       if (!empty($vResultado)) {
         //Obtener objeto
         $vResultado = $vResultado[0];
+
+        $subcategoria = $subcategoriaM->get($vResultado->IdSubcategoria);
+
+
+       $vResultado->IdSubcategoria = $subcategoria;
+
+        
       }
       return $vResultado;
     } catch (Exception $e) {
