@@ -114,9 +114,8 @@ CREATE TABLE traslado (
     Id INT PRIMARY KEY,
     FechaEnvio DATE,
     FechaRecibido DATE,
-    UsuarioRegistro INT,
-	-- ProductID INT, FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto),
-    -- Cantidad INT,
+    Cantidad  INT,
+    UsuarioRegistro INT, FOREIGN KEY (UsuarioRegistro) REFERENCES Usuario(Id),
     BodegaOrigenID INT, FOREIGN KEY (BodegaOrigenID) REFERENCES bodega(Id),
     BodegaDestinoID INT, FOREIGN KEY (BodegaDestinoID) REFERENCES bodega(Id)    
 );
