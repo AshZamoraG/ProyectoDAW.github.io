@@ -29,16 +29,34 @@ class OrdenCompraModel
             die("" . $e->getMessage());
         }
     }
-    public function get($id)
+     public function get($id)
     {
       try {
         $vSql = "SELECT * from ordenCompra where Id = $id";
-  
+        $proveedorM = new ProveedorModel();
+        $bodegaM = new BodegaModel();
+        $usuarioM = new UsuarioModel();
+        $productoM = new ProductoModel();
+        
         //Ejecutar la consulta sql
         $vResultado = $this->enlace->executeSQL($vSql);
         if (!empty($vResultado)) {
           //Obtener objeto
           $vResultado = $vResultado[0];
+
+          $usuario = $usuarioM->get($vResultado->UsuarioRegistro);
+          $vResultado->UsuarioRegistro = $usuario;
+
+          $producto = $productoM->get( $vResultado->IdProducto);
+          $vResultado->IdProducto = $producto;
+
+          $proveedor = $proveedorM->get( $vResultado->IdProveedor);
+          $vResultado->IdProveedor = $proveedor;
+
+          $bodega = $bodegaM->get( $vResultado->IdBodega);
+          $vResultado->IdBodega= $bodega;
+
+
         }
         return $vResultado;
       } catch (Exception $e) {
