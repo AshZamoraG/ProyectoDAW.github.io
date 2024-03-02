@@ -2,13 +2,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
-import ListItemText from '@mui/material/ListItemText';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import StarIcon from '@mui/icons-material/Star';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemButton from '@mui/material/ListItemButton';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { Grid } from '@mui/material';
 import ProductoService from '../../services/ProductoService';
 
@@ -24,7 +19,7 @@ export function DetailProducto() {
  const[loaded,setLoaded]=useState(false);
    useEffect(()=>{
     //Llamar al API y obtener una pelicula
-    ProductoService.getProductoById(routeParams.id)
+    ProductoService.ProductoById(routeParams.Id)
     .then( response=>{
       setData(response.data.results)
       console.log(response.data)
@@ -37,7 +32,7 @@ export function DetailProducto() {
       throw new Error("Respuesta no válida del servidor")
     }      
     )
-  },[routeParams.id]) 
+  },[routeParams.Id]) 
 
   if(!loaded) return <p>Cargando...</p>
   if(error) return <p>Error: {error.message}</p>
@@ -59,70 +54,50 @@ export function DetailProducto() {
           </Grid>
           <Grid item={true} xs={7}>            
               <Typography variant='h4' component='h1' gutterBottom>
-               {data.title}
+               {data.Nombre}
               </Typography>
               <Typography variant='subtitle1' component='h1' gutterBottom>
-               {data.year}
+               {data.Descripcion}
               </Typography>
               <Typography component='span' variant='subtitle1' display='block'>
                 <Box fontWeight='bold' display='inline'>
-                  Tiempo: {data.time}
+                  Talla: {data.Talla}
                 </Box>{' '}
-                 minutos
+                 
               </Typography>
               <Typography component='span' variant='subtitle1' display='block'>
                 <Box fontWeight='bold' display='inline'>
-                  Idioma:
-                </Box>{' '} {data.lang}
+                  Marca:
+                </Box>{' '} {data.Marca}
                 
               </Typography>
               <Typography component='span' variant='subtitle1' display='block'>
                 <Box fontWeight='bold' display='inline'>
                   Director:
                 </Box>{' '}
-                  {data.director.fname} {data.director.lname}
+                   {data.CostoUnitario}
               </Typography>
-              <Typography component='span' variant='subtitle1'>
-                <Box fontWeight='bold'>Generos:</Box>
-                <List
-                  sx={{
-                    width: '100%',
-                    maxWidth: 360,
-                    bgcolor: 'background.paper',
-                  }}
-                >
-                {data.genres.map((item)=>( 
-                  <ListItemButton key={item.id}>
-                    <ListItemIcon>
-                      <ArrowRightIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={item.title} />
-                  </ListItemButton>
-                 ))}
-                </List>
+              <Typography component='span' variant='subtitle1' display='block'>
+                <Box fontWeight='bold' display='inline'>
+                  Director:
+                </Box>{' '}
+                   {data.CantidadTotalEnStock}
               </Typography>
+             
               <Typography component='span' variant='subtitle1'>
                 <Box fontWeight='bold'>Actores:</Box>
                 <List
-                  sx={{
-                    width: '100%',
-                    maxWidth: 360,
-                    bgcolor: 'background.paper',
-                  }}
-                >
-                {data.actors.map((item)=>(  
-                  <ListItemButton key={item.id}>
-                    <ListItemIcon>
-                      <StarIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={`${item.fname} ${item.lname}`} />
-                  </ListItemButton>
-                ))}
-                </List>
-              </Typography>
-          </Grid>
+                  sx={{width: '100%',
+                  maxWidth: 360,
+                  bgcolor: 'background.paper',
+                }}
+              >
+
+              </List>
+            </Typography>
         </Grid>
-     )}
-    </Container>
-  );
+      </Grid>
+   )}
+  </Container>
+);
 }
