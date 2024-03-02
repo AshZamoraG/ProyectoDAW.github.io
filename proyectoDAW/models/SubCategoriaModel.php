@@ -28,7 +28,7 @@ class SubcategoriaModel
     }
   }
   
-  public function get($id)
+ public function get($id)
   {
     try {
       $vSql = "SELECT * from subcategoria where Id = $id";
