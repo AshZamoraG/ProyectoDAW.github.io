@@ -73,28 +73,18 @@ export function DetailProducto() {
               </Typography>
               <Typography component='span' variant='subtitle1' display='block'>
                 <Box fontWeight='bold' display='inline'>
-                  Director:
+                  Costo por Unidad:
                 </Box>{' '}
                    {data.CostoUnitario}
               </Typography>
               <Typography component='span' variant='subtitle1' display='block'>
                 <Box fontWeight='bold' display='inline'>
-                  Director:
+                  Cantidad total en Stock:
                 </Box>{' '}
                    {data.CantidadTotalEnStock}
               </Typography>
              
-              <Typography component='span' variant='subtitle1'>
-                <Box fontWeight='bold'>Actores:</Box>
-                <List
-                  sx={{width: '100%',
-                  maxWidth: 360,
-                  bgcolor: 'background.paper',
-                }}
-              >
-
-              </List>
-            </Typography>
+              
         </Grid>
       </Grid>
    )}
