@@ -41,8 +41,8 @@ export function ListProducto() {
   if (error) return <p>Error: {error}</p>;
   return (
     <Grid container style={{ padding: 2 }} spacing={3}>
-      {/*data && data.map((item)=>(  ))*/}
-        <Grid item xs={4}  >
+      {data && data.map((item)=>(  
+        <Grid item xs={4} key={item.Id} >
         <Card>
           <CardHeader
             sx={{
@@ -51,19 +51,19 @@ export function ListProducto() {
               color: (theme) => theme.palette.common.white,
             }}
             style={{ textAlign: 'center' }}
-            title="Nombre"
-            subheader="Descripcion"
+            title={item.Nombre}
+            subheader={item.Descripcion}
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-              <CheckroomIcon /> {/*item.Talla*/}Talla
+              <CheckroomIcon /> {item.Talla}Talla
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              <InsightsIcon />{/*item.Marca*/}  Marca
+              <InsightsIcon />{item.Marca}  Marca
 
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              <InventoryIcon />{/*item.CantidadTotalEnStock*/} Stock
+              <InventoryIcon />{item.CantidadTotalEnStock} Stock
             </Typography>
           </CardContent>
           <CardActions
@@ -75,7 +75,7 @@ export function ListProducto() {
           >
             <IconButton
               component={Link}
-              to={`/producto/`}
+              to={`/producto`}
               aria-label="Detalle"
               sx={{ ml: 'auto' }}
             >
@@ -84,7 +84,7 @@ export function ListProducto() {
           </CardActions>
         </Card>
       </Grid>
-     
+     ))}
     </Grid>
   );
 }
