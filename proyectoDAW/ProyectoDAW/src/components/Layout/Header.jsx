@@ -33,19 +33,19 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="a" color='#00fdfd' href='/' sx={{ flexGrow: 1 }}>
-            News
+            Menu
           </Typography>
           {/* Menu de Matenimientos */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button color="secondary" component={Link} to='/producto'>
               <Typography textAlign="center">Producto</Typography>
             </Button>
-            <Button color="secondary">
-              <Typography textAlign="center">Filtrar Peliculas</Typography>
+            <Button color="secondary" component={Link} to='/ordencompra'>
+              <Typography textAlign="center">Orden de Compra</Typography>
             </Button>
-            <Button color="secondary">
+            <Button color="secondary" component={Link} to='/inventario'>
               <Typography textAlign="center">
-                Mantenimiento Peliculas
+                Inventario
               </Typography>
             </Button>
           </Box>
