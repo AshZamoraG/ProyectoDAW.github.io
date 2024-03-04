@@ -75,7 +75,7 @@ export function ListProducto() {
           >
             <IconButton
               component={Link}
-              to={`/producto/${item.id}`}
+              to={`/producto/${item.Id}`}
               aria-label="Detalle"
               sx={{ ml: 'auto' }}
             >
