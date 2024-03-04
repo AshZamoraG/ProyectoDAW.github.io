@@ -90,7 +90,7 @@ CREATE TABLE contactos (
 );
 
 -- Crear la tabla OrdenCompra
-CREATE TABLE ordenCompra (
+CREATE TABLE ordencompra (
     Id INT PRIMARY KEY,
     FechaGeneracion DATE,
     FechaRecepcion DATE,
@@ -114,8 +114,9 @@ CREATE TABLE traslado (
     Id INT PRIMARY KEY,
     FechaEnvio DATE,
     FechaRecibido DATE,
-    Cantidad  INT,
-    UsuarioRegistro INT, FOREIGN KEY (UsuarioRegistro) REFERENCES Usuario(Id),
+    UsuarioRegistro INT,
+	-- ProductID INT, FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto),
+    -- Cantidad INT,
     BodegaOrigenID INT, FOREIGN KEY (BodegaOrigenID) REFERENCES bodega(Id),
     BodegaDestinoID INT, FOREIGN KEY (BodegaDestinoID) REFERENCES bodega(Id)    
 );
@@ -211,7 +212,7 @@ INSERT INTO contactos (Id, IdProveedor, Nombre, CorreoElectronico, Telefono) VAL
 (3, 2, 'Contacto 3', 'contacto3@proveedora.com', '98765432');
 
 -- Para la tabla OrdenCompra
-INSERT INTO ordenCompra (Id, FechaGeneracion, FechaRecepcion, UsuarioRegistro, IdProducto, IdProveedor, IdBodega) VALUES
+INSERT INTO ordencompra (Id, FechaGeneracion, FechaRecepcion, UsuarioRegistro, IdProducto, IdProveedor, IdBodega) VALUES
 (1, '2024-02-01', '2024-02-05', 3, 1, 1, 1),
 (2, '2024-02-02', '2024-02-06', 4, 2, 2, 2),
 (3, '2024-02-02', '2024-02-06', 5, 4, 3, 3);
@@ -270,35 +271,81 @@ WHERE
     usuarioXbodega.IdUsuario = 3;
 
 
-
 -- GET OrdenXProducto
 
 SELECT 
-    ordenCompra.Id,
-    ordenCompra.FechaGeneracion,
+    ordencompra.Id,
+    ordencompra.FechaGeneracion,
     proveedor.Nombre AS NombreProveedor,
     bodega.Nombre AS NombreBodega,
-    ordenCompra.FechaRecepcion,
+    ordencompra.FechaRecepcion,
     usuario.Nombre AS NombreUsuario,
     producto.Nombre AS NombreProducto,
     ordenXproducto.Cantidad,
     ordenXproducto.PrecioUnidad
 FROM 
-    ordenCompra
-    JOIN proveedor ON ordenCompra.IdProveedor = proveedor.Id
-    JOIN bodega ON ordenCompra.IdBodega = bodega.Id
-    JOIN usuario ON ordenCompra.UsuarioRegistro = usuario.Id
-    JOIN ordenXproducto ON ordenCompra.Id = ordenXproducto.IdOrdenCompra
+    ordencompra
+    JOIN proveedor ON ordencompra.IdProveedor = proveedor.Id
+    JOIN bodega ON ordencompra.IdBodega = bodega.Id
+    JOIN usuario ON ordencompra.UsuarioRegistro = usuario.Id
+    JOIN ordenXproducto ON ordencompra.Id = ordenXproducto.IdOrdenCompra
     JOIN producto ON ordenXproducto.IdProducto = Producto.Id
 WHERE 
-    ordenCompra.Id = 1 
+    ordencompra.Id = 1 
 ORDER BY 
     ordenCompra.Id, ordenXproducto.IdProducto;
 
 
 
 
-
+-- GET getProdcutoById
+    
+    SELECT 
+    producto.Id,
+    producto.Nombre AS NombreProducto,
+    producto.Descripcion,
+    producto.Marca,
+    producto.Talla,
+    producto.CostoUnitario,
+    producto.CantidadTotalEnStock,
+    producto.CodigoSKU,
+    subcategoria.Nombre AS NombreSubcategoria,
+    categoria.Nombre AS NombreCategoria
+FROM 
+    producto
+INNER JOIN 
+    subcategoria ON producto.IdSubcategoria = subcategoria.Id
+INNER JOIN 
+    categoria ON subcategoria.IdCategoria = categoria.Id
+WHERE
+    producto.Id = 2;
+    
+  -- GET getOrdenompraById 
+    
+    SELECT 
+    ordencompra.Id,
+    ordencompra.FechaGeneracion,
+    ordencompra.FechaRecepcion,
+    producto.CodigoSKU AS CodigoProducto,
+    producto.Nombre AS NombreProducto,
+	proveedor.Id AS CodigoProveedor,
+    proveedor.Nombre AS NombreProveedor,
+    bodega.Id AS CodigoBodega,
+    bodega.Nombre AS NombreBodega,
+    usuario.Id AS CodigoUsuario,
+    usuario.Nombre AS NombreUsuario
+FROM 
+    ordencompra
+INNER JOIN 
+    producto ON ordencompra.IdProducto = producto.Id
+INNER JOIN 
+    proveedor ON ordencompra.IdProveedor = proveedor.Id
+INNER JOIN 
+    bodega ON ordencompra.IdBodega = bodega.Id
+INNER JOIN 
+    usuario ON ordencompra.UsuarioRegistro = usuario.Id
+WHERE
+    ordencompra.Id = 3;
 
 
 
