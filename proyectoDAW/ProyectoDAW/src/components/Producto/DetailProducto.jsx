@@ -1,11 +1,11 @@
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import List from '@mui/material/List';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import ProductoService from '../../services/ProductoService';
+
 
 export function DetailProducto() {
   const routeParams= useParams();
@@ -19,7 +19,7 @@ export function DetailProducto() {
  const[loaded,setLoaded]=useState(false);
    useEffect(()=>{
     //Llamar al API y obtener una pelicula
-    ProductoService.ProductoById(routeParams.Id)
+    ProductoService.getProductoById(routeParams.Id)
     .then( response=>{
       setData(response.data.results)
       console.log(response.data)
@@ -33,6 +33,7 @@ export function DetailProducto() {
     }      
     )
   },[routeParams.Id]) 
+
 
   if(!loaded) return <p>Cargando...</p>
   if(error) return <p>Error: {error.message}</p>
@@ -48,8 +49,7 @@ export function DetailProducto() {
             maxWidth:'100%',
             height: 'auto',
           }}
-          alt="Ticket pelicula"
-          src={"ticket"}/> 
+          /> 
             
           </Grid>
           <Grid item={true} xs={7}>            
@@ -82,6 +82,14 @@ export function DetailProducto() {
                   Cantidad total en Stock:
                 </Box>{' '}
                    {data.CantidadTotalEnStock}
+              </Typography>
+              <Typography component='span' variant='subtitle1'>
+                <Box fontWeight='bold' display='inline'>Categoria:</Box>
+                {data.NombreCategoria}
+              </Typography>
+              <Typography component='span' variant='subtitle1'display='block'>
+                <Box fontWeight='bold'display='inline'>Subcategoria:</Box>
+                {data.NombreSubcategoria}
               </Typography>
              
               
