@@ -11,5 +11,9 @@ class OrdenCompraService {
   getOrdenCompraById(Id){
     return axios.get(BASE_URL+"/getOrdenCompraById/"+Id)
   }
+
+  OrdenCompraFactura(Id){
+    return axios.get(BASE_URL+"/OrdenCompraFactura/"+Id)
+  }
 }
 export default new OrdenCompraService();
