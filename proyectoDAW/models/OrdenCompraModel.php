@@ -94,4 +94,38 @@ class OrdenCompraModel
 
       return $vResultado[0];
     }
+
+    public function OrdenCompraFactura(){
+        $vSql = " SELECT 
+        ordencompra.Id AS OrdenCompraId,
+        ordencompra.FechaGeneracion,
+        ordencompra.FechaRecepcion,
+        usuario.Id AS CodigoUsuario,
+        usuario.Nombre AS NombreUsuario,
+        producto.Id AS CodigoProducto,
+        producto.CodigoSKU AS CodigoSKU,
+        producto.Nombre AS NombreProducto,
+        producto.Descripcion AS DescripcionProducto,
+        proveedor.Id AS CodigoProveedor,
+        proveedor.Nombre AS NombreProveedor,
+        ordenXproducto.Cantidad,
+        ordenXproducto.PrecioUnidad
+    FROM 
+        ordencompra
+    INNER JOIN 
+        ordenXproducto ON ordencompra.Id = ordenXproducto.IdOrdenCompra
+    INNER JOIN 
+        producto ON ordenXproducto.IdProducto = producto.Id
+    INNER JOIN 
+        proveedor ON ordencompra.IdProveedor = proveedor.Id
+    INNER JOIN 
+        usuario ON ordencompra.UsuarioRegistro = usuario.Id
+        
+    WHERE
+        ordencompra.Id = 3;";
+         //Ejecutar la consulta sql
+         $vResultado = $this->enlace->executeSQL($vSql);
+  
+        return $vResultado[0];
+      }
 }
