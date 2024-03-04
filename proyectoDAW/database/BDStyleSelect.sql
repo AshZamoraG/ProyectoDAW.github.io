@@ -95,7 +95,6 @@ CREATE TABLE ordencompra (
     FechaGeneracion DATE,
     FechaRecepcion DATE,
     UsuarioRegistro INT, foreign key (UsuarioRegistro) References usuario(Id),
-	IdProducto INT, FOREIGN KEY (IdProducto) REFERENCES producto(Id),
     IdProveedor INT, FOREIGN KEY (IdProveedor) REFERENCES proveedor(Id),
     IdBodega int, FOREIGN KEY (IdBodega) REFERENCES bodega(Id)
      --   Cantidad INT,
@@ -212,10 +211,10 @@ INSERT INTO contactos (Id, IdProveedor, Nombre, CorreoElectronico, Telefono) VAL
 (3, 2, 'Contacto 3', 'contacto3@proveedora.com', '98765432');
 
 -- Para la tabla OrdenCompra
-INSERT INTO ordencompra (Id, FechaGeneracion, FechaRecepcion, UsuarioRegistro, IdProducto, IdProveedor, IdBodega) VALUES
-(1, '2024-02-01', '2024-02-05', 3, 1, 1, 1),
-(2, '2024-02-02', '2024-02-06', 4, 2, 2, 2),
-(3, '2024-02-02', '2024-02-06', 5, 4, 3, 3);
+INSERT INTO ordencompra (Id, FechaGeneracion, FechaRecepcion, UsuarioRegistro,  IdProveedor, IdBodega) VALUES
+(1, '2024-02-01', '2024-02-05', 3,  1, 1),
+(2, '2024-02-02', '2024-02-06', 4,  2, 2),
+(3, '2024-02-02', '2024-02-06', 5,  3, 3);
 
 -- Para la tabla Traslado
 INSERT INTO traslado (Id, FechaEnvio, FechaRecibido, UsuarioRegistro, BodegaOrigenID, BodegaDestinoID) VALUES
@@ -348,8 +347,36 @@ WHERE
     ordencompra.Id = 3;
 
 
+  -- GET OrdenCompraFactura 
 
-
+    
+    SELECT 
+    ordencompra.Id AS OrdenCompraId,
+    ordencompra.FechaGeneracion,
+    ordencompra.FechaRecepcion,
+    usuario.Id AS CodigoUsuario,
+    usuario.Nombre AS NombreUsuario,
+    producto.Id AS CodigoProducto,
+    producto.CodigoSKU AS CodigoSKU,
+    producto.Nombre AS NombreProducto,
+    producto.Descripcion AS DescripcionProducto,
+    proveedor.Id AS CodigoProveedor,
+    proveedor.Nombre AS NombreProveedor,
+    ordenXproducto.Cantidad,
+    ordenXproducto.PrecioUnidad
+FROM 
+    ordencompra
+INNER JOIN 
+    ordenXproducto ON ordencompra.Id = ordenXproducto.IdOrdenCompra
+INNER JOIN 
+    producto ON ordenXproducto.IdProducto = producto.Id
+INNER JOIN 
+    proveedor ON ordencompra.IdProveedor = proveedor.Id
+INNER JOIN 
+    usuario ON ordencompra.UsuarioRegistro = usuario.Id
+    
+WHERE
+    ordencompra.Id = 3;
 
 
 
