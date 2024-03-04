@@ -8,8 +8,10 @@ class ProductoService {
   }
   //Obtener una prodcuto
   //localhost:81/proyectoDAW/producto/2
-  ProductoById(Id){
-    return axios.get(BASE_URL+"/"+Id)
+
+
+  getProductoById(Id){
+    return axios.get(BASE_URL+"/getProductoById/"+Id)
   }
 }
 export default new ProductoService();
