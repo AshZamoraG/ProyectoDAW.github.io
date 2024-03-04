@@ -8,6 +8,10 @@ import { ListProducto } from './components/Producto/ListProducto.jsx'
 import { PageNotFound } from './components/Home/PageNotFound.jsx'
 import { DetailProducto } from './components/Producto/DetailProducto.jsx'
 import TableProducto from './components/Producto/TableProducto.jsx'
+import { ListOrdenCompra } from './components/OrdenCompra/ListOrdenCompra.jsx'
+//import { DetailOrdenCompra } from './components/OrdenCompra/DetailOrdenCompra.jsx'
+import { ListInventario } from './components/Inventario/ListInventario.jsx'
+import { DetailOrdenCompra } from './components/OrdenCompra/DetailOrdenCompra.jsx'
 
 const rutas=createBrowserRouter([
   {
@@ -23,7 +27,15 @@ const rutas=createBrowserRouter([
       },
       {
         path:'/producto',
-        element: <ListProducto/>
+        element: <ListProducto />
+      },
+      {
+        path:'/ordencompra',
+        element: <ListOrdenCompra />
+      },
+      {
+        path:'/Inventario',
+        element: <ListInventario />
       },
       {
         path:'producto-table',
@@ -32,6 +44,10 @@ const rutas=createBrowserRouter([
       {
         path:'/producto/:Id',
         element: <DetailProducto />
+      },
+      {
+        path:'/ordencompra/:Id',
+        element: <DetailOrdenCompra />
       }
     ]
   }
