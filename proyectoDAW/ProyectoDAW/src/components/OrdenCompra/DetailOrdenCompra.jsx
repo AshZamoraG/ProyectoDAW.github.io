@@ -18,7 +18,7 @@ export function DetailOrdenCompra() {
  const[loaded,setLoaded]=useState(false);
    useEffect(()=>{
     //Llamar al API y obtener una pelicula
-    OrdenCompraService.getOrdenCompraById(routeParams.Id)
+    OrdenCompraService.OrdenCompraFactura(routeParams.Id)
     .then( response=>{
       setData(response.data.results)
       console.log(response.data)
@@ -36,90 +36,73 @@ export function DetailOrdenCompra() {
   if(!loaded) return <p>Cargando...</p>
   if(error) return <p>Error: {error.message}</p>
   return (
-    <Container component='main' sx={{ mt: 8, mb: 2 }} >
-      {data && ( 
-        <Grid container spacing={2}>
-          
-          <Grid item={true} xs={5} >  
-          <Box component='img'
-           sx={{
-            borderRadius:'4%',
-            maxWidth:'100%',
-            height: 'auto',
-          }}
-         /> 
-            
-          </Grid>
-          <Grid item={true} xs={7}>            
-              <Typography variant='h4' component='h1' gutterBottom>
-               Orden Compra: N°{data.Id}
-              </Typography>
-              <Typography component='span' variant='subtitle1' display='block'>
-                <Box fontWeight='bold' display='inline'>
-                  Fecha de Generacion: {data.FechaGeneracion}
-                </Box>{' '}
-                 
-              </Typography>
-              <Typography component='span' variant='subtitle1' display='block'>
-                <Box fontWeight='bold' display='inline'>
-                    Fecha en la que se Resivio: {data.FechaRecepcion}
-                </Box>{' '} 
-                
-              </Typography>
-              <Typography component='span' variant='subtitle1' display='block'>
-                <Box fontWeight='bold'>
-                 Usuario que Registro:
-                </Box>{' '}
-                <Box display='block' >
-                  Código Usuario:{data.CodigoUsuario}
-                </Box>{' '}
-                <Box display='block'>
-                   Nombre Usuario:{data.NombreUsuario}
-                </Box>{' '}
-                   
-              </Typography>
-              <Typography component='span' variant='subtitle1' display='block'>
-                <Box fontWeight='bold' >
-                  Producto:
-                </Box>{' '}
-                <Box display='block' >
-                  Código Producto:{data.CodigoProducto}
-                </Box>{' '}
-                <Box display='block'>
-                   Nombre Producto:{data.NombreProducto}
-                </Box>{' '}
-                  
-              </Typography>
-              <Typography component='span' variant='subtitle1' display='block'>
-                <Box fontWeight='bold' display='inline'>
-                 Proveeedor:
-                </Box>{' '}
-                <Box display='block' >
-                  Código Proveeedor:{data.CodigoProveedor}
-                </Box>{' '}
-                <Box display='block'>
-                   Nombre Proveeedor:{data.NombreProveedor}
-                </Box>{' '}
-                 
-              </Typography>
-              <Typography component='span' variant='subtitle1' display='block'>
-                <Box fontWeight='bold' display='inline'>
-                   Bodega:
-                </Box>{' '}
-                <Box display='block' >
-                  Código Bodega:{data.CodigoBodega}
-                </Box>{' '}
-                <Box display='block'>
-                   Nombre Bodega:{data.NombreBodega}
-                </Box>{' '}
-                 
-           
-              </Typography>
-             
-              
+    <Container component='main' sx={{ mt: 8, mb: 2 }}>
+      <Typography variant='h4' component='h1' gutterBottom>
+        Factura
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Orden de Compra: N°{data.OrdenCompraId}
+            </Box>
+          </Typography>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Fecha de Generación: {data.FechaGeneracion}
+            </Box>
+          </Typography>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Fecha de Recepción: {data.FechaRecepcion}
+            </Box>
+          </Typography>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Usuario: {data.CodigoUsuario} - {data.NombreUsuario}
+            </Box>
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Producto: {data.CodigoProducto} - {data.NombreProducto}
+            </Box>
+          </Typography>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              SKU: {data.CodigoSKU}
+            </Box>
+          </Typography>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Descripción: {data.DescripcionProducto}
+            </Box>
+          </Typography>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Proveedor: {data.CodigoProveedor} - {data.NombreProveedor}
+            </Box>
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Cantidad: {data.Cantidad}
+            </Box>
+          </Typography>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Precio Unitario: {data.PrecioUnidad}
+            </Box>
+          </Typography>
+          <Typography component='span' variant='subtitle1' display='block'>
+            <Box fontWeight='bold' display='inline'>
+              Total: {data.PrecioUnidad * data.Cantidad}  
+            </Box>
+          </Typography>
         </Grid>
       </Grid>
-   )}
-  </Container>
-);
+    </Container>
+  );
 }
