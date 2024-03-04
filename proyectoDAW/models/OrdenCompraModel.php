@@ -29,7 +29,7 @@ class OrdenCompraModel
             die("" . $e->getMessage());
         }
     }
-     public function get($id)
+    public function get($id)
     {
       try {
         $vSql = "SELECT * from ordenCompra where Id = $id";
@@ -62,5 +62,36 @@ class OrdenCompraModel
       } catch (Exception $e) {
         die($e->getMessage());
       }
+    }
+
+    public function getOrdenCompraById(){
+      $vSql = "  SELECT 
+      ordencompra.Id,
+      ordencompra.FechaGeneracion,
+      ordencompra.FechaRecepcion,
+      producto.CodigoSKU AS CodigoProducto,
+      producto.Nombre AS NombreProducto,
+      proveedor.Id AS CodigoProveedor,
+      proveedor.Nombre AS NombreProveedor,
+      bodega.Id AS CodigoBodega,
+      bodega.Nombre AS NombreBodega,
+      usuario.Id AS CodigoUsuario,
+      usuario.Nombre AS NombreUsuario
+  FROM 
+      ordencompra
+  INNER JOIN 
+      producto ON ordencompra.IdProducto = producto.Id
+  INNER JOIN 
+      proveedor ON ordencompra.IdProveedor = proveedor.Id
+  INNER JOIN 
+      bodega ON ordencompra.IdBodega = bodega.Id
+  INNER JOIN 
+      usuario ON ordencompra.UsuarioRegistro = usuario.Id
+  WHERE
+      ordencompra.Id = 3;";
+       //Ejecutar la consulta sql
+       $vResultado = $this->enlace->executeSQL($vSql);
+
+      return $vResultado[0];
     }
 }
