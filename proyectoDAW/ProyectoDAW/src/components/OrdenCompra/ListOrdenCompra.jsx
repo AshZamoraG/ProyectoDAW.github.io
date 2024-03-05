@@ -27,15 +27,12 @@ export function ListOrdenCompra() {
       });
   }, []);
 
-  // Calculate the current items to display
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Total pages
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
   if (!loaded) return <p>Cargando...</p>;
@@ -47,11 +44,11 @@ export function ListOrdenCompra() {
         {currentItems.map((item) => (
           <Grid item xs={6} key={item.Id}>
             <Card sx={{ 
-        backgroundColor: '#f5f5f5', // Light grey background
-        transition: 'transform 0.3s ease-in-out, background-color 0.3s ease-in-out', // Smooth transition for transform and background-color
+        backgroundColor: '#f5f5f5', 
+        transition: 'transform 0.3s ease-in-out, background-color 0.3s ease-in-out', 
         '&:hover': {
-          transform: 'scale(1.05)', // Slightly grow the card size
-          backgroundColor: 'rgba(0, 0, 0, 0.1)' // Slightly darker color on hover
+          transform: 'scale(1.05)', 
+          backgroundColor: 'rgba(0, 0, 0, 0.1)'
         }
       }}>
               <CardHeader
