@@ -68,5 +68,33 @@ class InventarioModel
         die($e->getMessage());
       }
     }
+    public function getByIdUsuario($id)
+    {
+      try {
+        $vSql = "SELECT 
+        UsuarioXBodega.IdBodega,
+        Bodega.Nombre AS NombreBodega,
+        Producto.Nombre AS NombreProducto,
+        Producto.Descripcion,
+        Inventario.CantidadDisponible
+    FROM 
+        UsuarioXBodega
+        JOIN Bodega ON UsuarioXBodega.IdBodega = Bodega.Id
+        JOIN Inventario ON Bodega.Id = Inventario.IdBodega
+        JOIN Producto ON Inventario.IdProducto = Producto.Id
+    WHERE 
+        UsuarioXBodega.IdUsuario = $id;";
+        //Ejecutar la consulta sql
+        $vResultado = $this->enlace->executeSQL($vSql);
+        if (!empty($vResultado)) {
+          //Obtener objeto
+          
+
+        }
+        return $vResultado;
+      } catch (Exception $e) {
+        die($e->getMessage());
+      }
+    }
 
 }
