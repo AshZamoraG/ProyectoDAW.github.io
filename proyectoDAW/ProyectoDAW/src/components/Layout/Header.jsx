@@ -37,13 +37,13 @@ export default function Header() {
           </Typography>
           {/* Menu de Matenimientos */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button color="secondary" component={Link} to='/producto'>
+            <Button color="text2" component={Link} to='/producto'>
               <Typography textAlign="center">Producto</Typography>
             </Button>
-            <Button color="secondary" component={Link} to='/ordencompra'>
+            <Button color="text2" component={Link} to='/ordencompra'>
               <Typography textAlign="center">Orden de Compra</Typography>
             </Button>
-            <Button color="secondary" component={Link} to='/inventario'>
+            <Button color="text2" component={Link} to='/inventario'>
               <Typography textAlign="center">
                 Inventario
               </Typography>
